@@ -1,4 +1,4 @@
-package service;
+package service.house;
 
 import connection.ConnectionJDBC;
 import model.House;

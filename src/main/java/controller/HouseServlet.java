@@ -1,8 +1,10 @@
 package controller;
 
 import model.House;
-import service.HouseService;
-import service.IHouseService;
+import service.house.HouseService;
+import service.house.IHouseService;
+import service.owner.IOwnerService;
+import service.owner.OwnerService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ import java.util.List;
 @WebServlet(urlPatterns = "/houses")
 public class HouseServlet extends HttpServlet {
     IHouseService houseService = new HouseService();
+    IOwnerService ownerService= new OwnerService();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String act = req.getParameter("action");
@@ -23,8 +26,8 @@ public class HouseServlet extends HttpServlet {
             act = "";
         }
         switch (act){
-            case "create":
-//                showFormCreate(req, resp);
+            case "createNewPlace":
+                showFormCreateNewPlace(req, resp);
                 break;
             case "delete":
 //                showFormDelete(req, resp);
@@ -37,6 +40,18 @@ public class HouseServlet extends HttpServlet {
 
         }
 
+    }
+
+    private void showFormCreateNewPlace(HttpServletRequest req, HttpServletResponse resp) {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("create/createPlaceForm.jsp");
+        req.setAttribute("owners", ownerService.findAll());
+        try {
+            dispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showHomePage(HttpServletRequest req, HttpServletResponse resp) {
@@ -55,6 +70,23 @@ public class HouseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        String act = req.getParameter("action");
+        if (act == null){
+            act = "";
+        }
+        switch (act){
+            case "create":
+//                showFormCreate(req, resp);
+                break;
+            case "delete":
+//                showFormDelete(req, resp);
+                break;
+            case "edit":
+//                showFormEdit(req, resp);
+                break;
+            default:
+                showHomePage(req, resp);
+
+        }
     }
 }
