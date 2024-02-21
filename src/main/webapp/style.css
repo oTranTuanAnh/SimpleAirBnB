@@ -1,0 +1,28 @@
+.box-main{
+    margin: 20px;
+}
+.search-main{
+    width: 500px;
+    margin: auto;
+}
+.icon{
+    color: red;
+    margin-bottom: 5px;
+}
+.nav-bar{
+    position:fixed;
+    top: 0;
+    width: 100%;
+}
+.nav-items {
+    margin-right: 0px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    width: 100px;
+    height: 80px;
+}
+.navbar-nav{
+    flex-direction: row;
+    margin-top: 10px;
+}

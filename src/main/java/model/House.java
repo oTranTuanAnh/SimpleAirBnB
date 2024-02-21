@@ -6,6 +6,7 @@ public class House {
     private String address;
     private double price;
     private String picture;
+    private int owner_id;
 
     public House() {
     }
@@ -31,6 +32,27 @@ public class House {
         this.address = address;
         this.price = price;
         this.picture = picture;
+    }
+
+    public House(int id, int customerNumber, int livingRoom, int bedRoom, int bathRoom, int toilet, String address, double price, String picture, int owner_id) {
+        this.id = id;
+        this.customerNumber = customerNumber;
+        this.livingRoom = livingRoom;
+        this.bedRoom = bedRoom;
+        this.bathRoom = bathRoom;
+        this.toilet = toilet;
+        this.address = address;
+        this.price = price;
+        this.picture = picture;
+        this.owner_id = owner_id;
+    }
+
+    public int getOwner_id() {
+        return owner_id;
+    }
+
+    public void setOwner_id(int owner_id) {
+        this.owner_id = owner_id;
     }
 
     public int getId() {

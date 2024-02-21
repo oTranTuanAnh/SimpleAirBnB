@@ -5,16 +5,15 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="style.css">
     <title>simple airbnb</title>
 </head>
 <body>
 <div class="container">
     <!-- navbar -->
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-transparent">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="./img/logo.png" alt="" height="30" width="100"></a>
@@ -64,17 +63,56 @@
 
                 </ul>
             </div>
+
         </div>
+
     </nav>
+    <div class="search-main">
+        <form >
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search">
+                <button type="button" class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"class="bi bi-search" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                </svg></button>
+            </div>
+        </form>
+    </div>
+    <div class="option">
+        <ul class="navbar-nav ">
+            <li class="nav-item nav-items">
+                <a class="nav-link nav-links" aria-current="page" href="#">
+                    <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                        </svg>
+                    </div>
+                    <div class="name" data-text="new">New</div>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
     <!-- box -->
     <div class="box-main">
         <div class="showitem clearfix">
-            <div class="col-md-3">
-                <a href="#">
-                    <img src="https://xaynhachothue.vn/wp-content/uploads/2019/10/thiet-ke-nha-cho-thue-4.jpg" width="100%" height="250">
-                </a>
+            <div class="row">
+                <c:forEach items="${houses}" var="houses">
+                    <div class="col-md-3 mb-3">
+                        <a href="#">
+                            <img class="rounded-4" src="${houses.getPicture()}" width="100%" height="250">
+                        </a>
+                        <h5>${houses.getAddress()}</h5>
+                        <h6>${houses.getLivingRoom()} khách - ${houses.getBedRoom()} ngủ - ${houses.getBathRoom()} tắm -
+                                ${houses.getToilet()} vệ sinh</h6>
+                        <h6>${houses.getPrice()} $/đêm</h6>
 
+                    </div>
+                </c:forEach>
             </div>
+
+
 
         </div>
 
@@ -84,5 +122,6 @@
 
 
 </div>
+
 </body>
 </html>
