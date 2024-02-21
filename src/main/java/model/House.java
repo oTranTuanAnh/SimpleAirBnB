@@ -47,6 +47,18 @@ public class House {
         this.owner_id = owner_id;
     }
 
+    public House(int customerNumber, int livingRoom, int bedRoom, int bathRoom, int toilet, String address, double price, String picture, int owner_id) {
+        this.customerNumber = customerNumber;
+        this.livingRoom = livingRoom;
+        this.bedRoom = bedRoom;
+        this.bathRoom = bathRoom;
+        this.toilet = toilet;
+        this.address = address;
+        this.price = price;
+        this.picture = picture;
+        this.owner_id = owner_id;
+    }
+
     public int getOwner_id() {
         return owner_id;
     }

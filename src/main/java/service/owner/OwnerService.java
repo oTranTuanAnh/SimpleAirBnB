@@ -12,6 +12,7 @@ import java.util.List;
 
 public class OwnerService implements IOwnerService{
     public static final String SELECT_ALL_FROM_OWNERS = "select * from owners;";
+    public static final String INSERT_INTO_OWNERS_NAME_PHONE_PROVINCE_VALUES = "insert into owners(name, phone, province) VALUES (?,?,?);";
     Connection connection = ConnectionJDBC.getConnection();
     @Override
     public List<Owner> findAll() {
@@ -42,7 +43,15 @@ public class OwnerService implements IOwnerService{
 
     @Override
     public void save(Owner p) {
-
+        try {
+            PreparedStatement statement =connection.prepareStatement(INSERT_INTO_OWNERS_NAME_PHONE_PROVINCE_VALUES);
+            statement.setString(1, p.getName());
+            statement.setString(2, p.getPhone());
+            statement.setString(3, p.getProvince());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

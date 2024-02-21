@@ -1,6 +1,8 @@
 package controller;
 
+
 import model.House;
+import model.Owner;
 import service.house.HouseService;
 import service.house.IHouseService;
 import service.owner.IOwnerService;
@@ -29,6 +31,9 @@ public class HouseServlet extends HttpServlet {
             case "createNewPlace":
                 showFormCreateNewPlace(req, resp);
                 break;
+            case "createNewOwner":
+                showFormCreateNewOwner(req, resp);
+                break;
             case "delete":
 //                showFormDelete(req, resp);
                 break;
@@ -40,6 +45,17 @@ public class HouseServlet extends HttpServlet {
 
         }
 
+    }
+
+    private void showFormCreateNewOwner(HttpServletRequest req, HttpServletResponse resp) {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("create/createOwnerForm.jsp");
+        try {
+            dispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showFormCreateNewPlace(HttpServletRequest req, HttpServletResponse resp) {
@@ -75,8 +91,12 @@ public class HouseServlet extends HttpServlet {
             act = "";
         }
         switch (act){
-            case "create":
-//                showFormCreate(req, resp);
+            case "createNewPlace":
+                createNewPlace(req, resp);
+                break;
+            case "createNewOwner":
+                createNewOwner(req, resp);
+                showHomePage(req, resp);
                 break;
             case "delete":
 //                showFormDelete(req, resp);
@@ -88,5 +108,30 @@ public class HouseServlet extends HttpServlet {
                 showHomePage(req, resp);
 
         }
+    }
+
+    private void createNewPlace(HttpServletRequest req, HttpServletResponse resp) {
+        int p_cusNum = Integer.parseInt(req.getParameter("customer_number"));
+        int p_living = Integer.parseInt(req.getParameter("living_room"));
+        int p_bed = Integer.parseInt(req.getParameter("bed_room"));
+        int p_bath = Integer.parseInt(req.getParameter("living_room"));
+        int p_toilet = Integer.parseInt(req.getParameter("toilet"));
+        String p_address = req.getParameter("address");
+        double p_price = Double.parseDouble(req.getParameter("price"));
+        String p_picture = req.getParameter("picture");
+        int p_owner = Integer.parseInt(req.getParameter("owners"));
+        House house = new House(p_cusNum, p_living, p_bed, p_bath, p_toilet, p_address, p_price, p_picture, p_owner);
+        houseService.save(house);
+
+
+    }
+
+    private void createNewOwner(HttpServletRequest req, HttpServletResponse resp) {
+            String o_name = req.getParameter("name");
+            String o_phone = req.getParameter("phone");
+            String o_province = req.getParameter("province");
+            Owner owner = new Owner(o_name, o_phone, o_province);
+            ownerService.save(owner);
+
     }
 }

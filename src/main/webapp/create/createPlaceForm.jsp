@@ -78,10 +78,9 @@
                                 <div class="article-title">
                                     <form method="post">
                                         <select class="text-input" name="owners" id="owners">
-                                            <option value="" selected disabled hidden>select owner</option>
+                                            <option selected disabled hidden>select owner</option>
                                             <c:forEach items="${owners}" var="o">
                                                 <option value="${o.id}">${o.name} - ${o.province} - ${o.phone}</option>
-
                                             </c:forEach>
                                         </select>
                                         <input class="text-input" type="text" name="picture" placeholder="picture link">

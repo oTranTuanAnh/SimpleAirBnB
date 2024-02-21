@@ -12,6 +12,7 @@ import java.util.List;
 
 public class HouseService implements IHouseService{
     public static final String SELECT_ALL_FROM_HOUSES = "select * from houses;";
+    public static final String INSERT_INTO_HOUSES_VALUES = "insert into houses(customer_number, living_room, bed_room, bath_room, toilet, address, price, picture, owner_id) VALUES(?,?,?,?,?,?,?,?,?);";
     Connection connection = ConnectionJDBC.getConnection();
     @Override
     public List<House> findAll() {
@@ -48,7 +49,20 @@ public class HouseService implements IHouseService{
 
     @Override
     public void save(House p) {
-
+        try {
+            PreparedStatement statement = connection.prepareStatement(INSERT_INTO_HOUSES_VALUES);
+            statement.setString(1, String.valueOf(p.getCustomerNumber()));
+            statement.setString(2, String.valueOf(p.getLivingRoom()));
+            statement.setString(3, String.valueOf(p.getBedRoom()));
+            statement.setString(4, String.valueOf(p.getCustomerNumber()));
+            statement.setString(5, String.valueOf(p.getCustomerNumber()));
+            statement.setString(6, String.valueOf(p.getCustomerNumber()));
+            statement.setString(7, String.valueOf(p.getCustomerNumber()));
+            statement.setString(8, String.valueOf(p.getCustomerNumber()));
+            statement.setString(9, String.valueOf(p.getCustomerNumber()));
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
