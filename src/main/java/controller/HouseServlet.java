@@ -38,6 +38,9 @@ public class HouseServlet extends HttpServlet {
             case "detail":
                 showFormDetail(req, resp);
                 break;
+            case "delete":
+                showFormDelete(req, resp);
+                break;
             case "edit":
 //                showFormEdit(req, resp);
                 break;
@@ -46,6 +49,17 @@ public class HouseServlet extends HttpServlet {
 
         }
 
+    }
+
+    private void showFormDelete(HttpServletRequest req, HttpServletResponse resp) {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("delete/delete.jsp");
+        try {
+            dispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private void showFormDetail(HttpServletRequest req, HttpServletResponse resp) {
@@ -131,7 +145,8 @@ public class HouseServlet extends HttpServlet {
                 showHomePage(req, resp);
                 break;
             case "delete":
-//                showFormDelete(req, resp);
+                deleteHouse(req, resp);
+                showHomePage(req, resp);
                 break;
             case "edit":
 //                showFormEdit(req, resp);
@@ -140,6 +155,11 @@ public class HouseServlet extends HttpServlet {
                 showHomePage(req, resp);
 
         }
+    }
+
+    private void deleteHouse(HttpServletRequest req, HttpServletResponse resp) {
+        int h_id = Integer.parseInt(req.getParameter("id"));
+        houseService.delete(h_id);
     }
 
     private void createNewPlace(HttpServletRequest req, HttpServletResponse resp) {

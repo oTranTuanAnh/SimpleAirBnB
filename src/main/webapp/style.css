@@ -5,14 +5,7 @@
     width: 500px;
     margin: auto;
 }
-#load-more{
-    width: 800px;
-    display: flex;
-    margin: auto;
-}
-.load-more-item{
-    margin: auto;
-}
+
 .icon{
     color: red;
     margin-bottom: 5px;

@@ -1,0 +1,29 @@
+.text-navbar{
+    color: white;
+}
+.background-image1{
+    width: 200px;
+    height: 150px;
+}
+.image-input{
+    width: 500px;
+    height: 300px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.page-title{
+    margin-top: 10px;
+    text-align: center;
+    height: 100px;
+    margin-bottom: 20px;
+}
+.text-input{
+    width: 60%;
+    margin: 5px;
+    align-items: center;
+}
+.article-title{
+    text-align: center;
+}

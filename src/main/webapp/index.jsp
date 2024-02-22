@@ -129,10 +129,8 @@
 
     </div>
     <!-- infor -->
-    <div id="load-more">
-        <div class="load-more-item">
-            <button class="btn btn-danger">Load more</button>
-        </div>
+    <div class="d-grid gap-2 col-4 mx-auto">
+        <button class="btn btn-danger" type="button">Load more</button>
 
     </div>
 

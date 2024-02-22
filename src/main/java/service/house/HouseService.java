@@ -14,6 +14,7 @@ public class HouseService implements IHouseService{
     public static final String SELECT_ALL_FROM_HOUSES = "select * from houses;";
     public static final String INSERT_INTO_HOUSES_VALUES = "insert into houses(customer_number, living_room, bed_room, bath_room, toilet, address, price, picture, owner_id) VALUES(?,?,?,?,?,?,?,?,?);";
     public static final String SELECT_FROM_HOUSES_WHERE_ID = "select * from houses where id=?;";
+    public static final String DELETE_FROM_HOUSES_WHERE_ID = "delete from houses where id = ?;";
     Connection connection = ConnectionJDBC.getConnection();
     @Override
     public List<House> findAll() {
@@ -91,7 +92,13 @@ public class HouseService implements IHouseService{
 
     @Override
     public void delete(int id) {
-
+        try {
+            PreparedStatement statement = connection.prepareStatement(DELETE_FROM_HOUSES_WHERE_ID);
+            statement.setString(1, String.valueOf(id));
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
