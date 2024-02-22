@@ -2,6 +2,8 @@ package service.owner;
 
 import connection.ConnectionJDBC;
 import model.Owner;
+import service.house.HouseService;
+import service.house.IHouseService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,7 +15,9 @@ import java.util.List;
 public class OwnerService implements IOwnerService{
     public static final String SELECT_ALL_FROM_OWNERS = "select * from owners;";
     public static final String INSERT_INTO_OWNERS_NAME_PHONE_PROVINCE_VALUES = "insert into owners(name, phone, province) VALUES (?,?,?);";
+    public static final String SELECT_FROM_OWNERS_WHERE_ID = "select * from owners where id=?;";
     Connection connection = ConnectionJDBC.getConnection();
+    IHouseService houseService = new HouseService();
     @Override
     public List<Owner> findAll() {
         List<Owner> ownerList = new ArrayList<>();
@@ -38,7 +42,23 @@ public class OwnerService implements IOwnerService{
 
     @Override
     public Owner findById(int id) {
-        return null;
+        try {
+            PreparedStatement statement = connection.prepareStatement(SELECT_FROM_OWNERS_WHERE_ID);
+            statement.setString(1, String.valueOf(id));
+            ResultSet resultSet = statement.executeQuery();
+            Owner owner = null;
+            while (resultSet.next()){
+                String o_name = resultSet.getNString("name");
+                String o_phone = resultSet.getNString("phone");
+                String o_province = resultSet.getNString("province");
+                owner = new Owner(o_name, o_phone, o_province);
+
+            }
+            return owner;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override

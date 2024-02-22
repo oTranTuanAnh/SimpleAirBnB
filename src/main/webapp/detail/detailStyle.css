@@ -1,0 +1,50 @@
+.text-navbar{
+    color: white;
+}
+.background-image1{
+    width: 200px;
+    height: 150px;
+}
+.image-input{
+    width: 500px;
+    height: 300px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.page-title{
+    margin-top: 10px;
+    /* text-align: center; */
+}
+.text-input{
+    width: 60%;
+    margin: 5px;
+    align-items: center;
+}
+.article-title{
+    text-align: center;
+    margin-top: 10px;
+}
+.media{
+    display: flex;
+}
+.media-body{
+    padding: 10px;
+    padding-top: 0;
+    line-height: 1.8;
+}
+.media-text5{
+    margin-top: 5px !important;
+}
+.media-text6{
+    margin-top: 5px !important;
+    color: #1b48ff;
+}
+.mr-3{
+    color: red !important;
+    padding-top: 5px !important;
+}
+.img-infor{
+    margin-bottom: 10px !important;
+}

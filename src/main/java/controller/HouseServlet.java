@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(urlPatterns = "/houses")
@@ -34,8 +35,8 @@ public class HouseServlet extends HttpServlet {
             case "createNewOwner":
                 showFormCreateNewOwner(req, resp);
                 break;
-            case "delete":
-//                showFormDelete(req, resp);
+            case "detail":
+                showFormDetail(req, resp);
                 break;
             case "edit":
 //                showFormEdit(req, resp);
@@ -44,6 +45,36 @@ public class HouseServlet extends HttpServlet {
                 showHomePage(req, resp);
 
         }
+
+    }
+
+    private void showFormDetail(HttpServletRequest req, HttpServletResponse resp) {
+        RequestDispatcher dispatcher = req.getRequestDispatcher("detail/detail.jsp");
+        int id = Integer.parseInt(req.getParameter("id"));
+        req.setAttribute("houses", houseService.findById(id));
+        int o_id = houseService.findById(id).getOwner_id();
+        req.setAttribute("owner", ownerService.findById(o_id));
+        int random_int = (int)(Math.random() * (101) + 0);
+        req.setAttribute("reviews", random_int);
+        req.setAttribute("stars", getRamdomStar());
+
+        try {
+            dispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private List<Integer> getRamdomStar() {
+        List<Integer> list = new ArrayList<>();
+        int random_int = (int)(Math.random() * (6) + 1);
+        for (int i = 0; i < random_int; i++) {
+            list.add(i);
+
+        }
+        return list;
 
     }
 
@@ -93,6 +124,7 @@ public class HouseServlet extends HttpServlet {
         switch (act){
             case "createNewPlace":
                 createNewPlace(req, resp);
+                showHomePage(req, resp);
                 break;
             case "createNewOwner":
                 createNewOwner(req, resp);
